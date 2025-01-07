@@ -10,6 +10,6 @@ class Brandtype extends Model
     protected $primaryKey ='bt_id';
 
     protected $fillable = [
-        'brand_type',
+        'brandtype',
     ];
 }

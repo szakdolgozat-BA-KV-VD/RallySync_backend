@@ -2,7 +2,15 @@
 
 namespace Database\Factories;
 
+use App\Models\Place;
+use Faker\Provider\en_US\Text as En_USText;
+use Faker\Provider\fa_IR\Text as Fa_IRText;
+use Faker\Provider\hu_HU\Text;
+use Faker\Provider\pl_PL\Text as Pl_PLText;
+use Faker\Provider\pt_BR\Text as Pt_BRText;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use PhpParser\Node\Stmt\Label;
+use Symfony\Component\Console\Descriptor\Descriptor;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Competition>
@@ -16,8 +24,17 @@ class CompetitionFactory extends Factory
      */
     public function definition(): array
     {
+        $random_month = rand(1, 12);
+        $random_dayStart = rand(1, 31);
+        $random_dayEnd = rand($random_dayStart, 31);
+
         return [
-            //
+            'event_name' => fake()->text(10),
+            'place' => rand(1, Place::count()),            
+            'organiser' => rand(2, 2),
+            'description' => fake()->text(50),
+            'start_date' => date('Y-m-d', strtotime("2025-$random_month-$random_dayStart")),
+            'end_date' => date('Y-m-d', strtotime("2025-$random_month-$random_dayEnd")),
         ];
     }
 }

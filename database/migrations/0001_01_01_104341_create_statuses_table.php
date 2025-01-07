@@ -16,20 +16,20 @@ return new class extends Migration
             $table->id('stat_id');
             $table->char('statsus'); //E = Elérhető | S = Szervíz | F = Foglalt | P = Pályán
             $table->timestamps();
-
-            Status::create([ 
-                'statsus'=> 'E', // Elérhető
-            ]);
-            Status::create([ 
-                'statsus'=> 'S', // Szervíz
-            ]);
-            Status::create([ 
-                'statsus'=> 'F', // Foglalt
-            ]);
-            Status::create([ 
-                'statsus'=> 'P', // Pályán
-            ]);
         });
+
+        Status::create([ 
+            'statsus'=> 'Szabad', // Elérhető
+        ]);
+        Status::create([ 
+            'statsus'=> 'Foglalt', // Foglalt
+        ]);
+        Status::create([ 
+            'statsus'=> 'Pályán', // Pályán
+        ]);
+        Status::create([ 
+            'statsus'=> 'Szervízelés alatt', // Szervíz
+        ]);
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Place;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +17,38 @@ return new class extends Migration
             $table->string('place');
             $table->timestamps();
         });
+
+        Place::create([ 
+            'place'=> 'Kanári szigetek',
+        ]);
+
+        Place::create([ 
+            'place'=> 'Veszprém',
+        ]);
+
+        Place::create([ 
+            'place'=> 'Karlstad',
+        ]);
+
+        Place::create([ 
+            'place'=> 'Mikołajki',
+        ]);
+
+        Place::create([ 
+            'place'=> 'Róma',
+        ]);
+
+        Place::create([ 
+            'place'=> 'Zlín',
+        ]);
+
+        Place::create([ 
+            'place'=> 'Ceredigion',
+        ]);
+
+        Place::create([ 
+            'place'=> 'Zágráb',
+        ]);
     }
 
     /**

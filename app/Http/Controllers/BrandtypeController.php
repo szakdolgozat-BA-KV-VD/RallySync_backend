@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brandtype;
 use Illuminate\Http\Request;
 
 class BrandtypeController extends Controller

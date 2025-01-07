@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('compcategs', function (Blueprint $table) {
-            $table->id();
+            $table->id('coca_id');
+            $table->foreignId('competition') -> references('comp_id')->on('competitions');
+            $table->foreignId('category') -> references('categ_id')->on('categories');
+            $table->integer('min_entry');
+            $table->integer('max_entry');
             $table->timestamps();
         });
     }

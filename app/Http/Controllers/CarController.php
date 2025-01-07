@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CarController extends Controller
 {
@@ -12,6 +14,41 @@ class CarController extends Controller
     public function index()
     {
         return Car::all();
+    }
+
+    public function osszesAutoMarkajaCategoriakkalAllapottal()
+    {
+        return DB::select('
+            SELECT bt.brandtype, ca.category, ss.statsus 
+            FROM cars cs
+            INNER JOIN brandtypes bt ON cs.brandtype = bt.bt_id
+            INNER JOIN categories ca ON cs.category = ca.categ_id
+            INNER JOIN statuses ss ON cs.status = ss.stat_id
+        ');
+    }
+
+    public function osszesSzabadAuto()
+    {
+        return DB::select('
+            SELECT bt.brandtype, ca.category, ss.statsus 
+            FROM cars cs
+            INNER JOIN brandtypes bt ON cs.brandtype = bt.bt_id
+            INNER JOIN categories ca ON cs.category = ca.categ_id
+            INNER JOIN statuses ss ON cs.status = ss.stat_id
+            WHERE ss.statsus = ?
+        ', ['Szabad']);
+    }
+
+    public function osszesFoglaltAuto()
+    {
+        return DB::select('
+            SELECT bt.brandtype, ca.category, ss.statsus 
+            FROM cars cs
+            INNER JOIN brandtypes bt ON cs.brandtype = bt.bt_id
+            INNER JOIN categories ca ON cs.category = ca.categ_id
+            INNER JOIN statuses ss ON cs.status = ss.stat_id
+            WHERE ss.statsus = ?
+        ', ['Foglalt']);
     }
 
     /**

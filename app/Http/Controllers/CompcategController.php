@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Compcateg;
 use Illuminate\Http\Request;
 
 class CompcategController extends Controller

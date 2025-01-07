@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Car;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +19,48 @@ return new class extends Migration
             $table->foreignId('status')-> references('stat_id')->on('statuses');
             $table->timestamps();
         });
+
+        /* Car::create([ 
+            'brandtype'=> 3,
+            'category' => 1,
+            'status' => 1
+        ]);
+
+        Car::create([ 
+            'brandtype'=> 5,
+            'category' => 2,
+            'status' => 3
+        ]);
+
+        Car::create([ 
+            'brandtype'=> 7,
+            'category' => 1,
+            'status' => 4
+        ]);
+
+        Car::create([ 
+            'brandtype'=> 6,
+            'category' => 2,
+            'status' => 1
+        ]);
+
+        Car::create([ 
+            'brandtype'=> 3,
+            'category' => 2,
+            'status' => 1
+        ]);
+
+        Car::create([ 
+            'brandtype'=> 1,
+            'category' => 2,
+            'status' => 1
+        ]);
+
+        Car::create([ 
+            'brandtype'=> 4,
+            'category' => 3,
+            'status' => 2
+        ]); */
     }
 
     /**
