@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('event_name');
             $table->foreignId('place')->references('plac_id')->on('places');
             $table->foreignId('organiser')->references('id')->on('users');
+            $table->foreignId('state')->references('state_id')->on('c_states');
             $table->string('description');
             $table->date('start_date');
             $table->date('end_date');
