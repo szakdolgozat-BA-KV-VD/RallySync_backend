@@ -17,6 +17,12 @@ class UserController extends Controller
         return User::all();
     }
 
+    
+    public function getone($id)
+    {
+        return User::find($id);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
