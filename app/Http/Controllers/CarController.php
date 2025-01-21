@@ -13,11 +13,6 @@ class CarController extends Controller
      */
     public function index()
     {
-        return Car::all();
-    }
-
-    public function osszesAutoMarkajaCategoriakkalAllapottal()
-    {
         return DB::select('
             SELECT bt.brandtype, ca.category, ss.statsus 
             FROM cars cs
@@ -66,7 +61,14 @@ class CarController extends Controller
      */
     public function show(string $id)
     {
-        return Car::find($id);
+        return DB::select('
+        SELECT bt.brandtype, ca.category, ss.statsus 
+        FROM cars cs
+        INNER JOIN brandtypes bt ON cs.brandtype = bt.bt_id
+        INNER JOIN categories ca ON cs.category = ca.categ_id
+        INNER JOIN statuses ss ON cs.status = ss.stat_id
+        WHERE cs.cid = ?
+    ', [$id]);
     }
 
     /**
@@ -85,5 +87,14 @@ class CarController extends Controller
     public function destroy(string $id)
     {
         Car::find($id)->delete();
+    }
+
+    public function CompetCars(string $car){
+        return DB::select(
+            '
+            SELECT * FROM compeets 
+            WHERE car = ?
+            ', [$car]
+        );
     }
 }
