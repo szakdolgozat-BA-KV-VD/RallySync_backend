@@ -16,7 +16,6 @@ class Competition extends Model
         'event_name',
         'place',
         'organiser',
-        'v_allapots',
         'description',
         'start_date',
         'end_date',
