@@ -16,7 +16,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phonenumber', 20)->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->foreignId('permission')->references('perm_id')->on('permissions');
             $table->string('password');

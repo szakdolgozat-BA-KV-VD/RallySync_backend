@@ -7,20 +7,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+use HasFactory, Notifiable, HasApiTokens;
+
 class UserController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         return User::all();
-    }
-
-    
-    public function getone($id)
-    {
-        return User::find($id);
     }
 
     /**
@@ -58,6 +55,7 @@ class UserController extends Controller
     {
         User::find($id)->delete();
     }
+
 
     //speciális függvények
     public function updatePassword(Request $request, $id)

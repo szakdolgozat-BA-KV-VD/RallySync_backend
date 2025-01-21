@@ -26,7 +26,7 @@ class UserFactory extends Factory
         return [
             'name' => fake('hu_HU')->name(),
             'email' => fake()->unique()->safeEmail(),
-            'phonenumber' => fake()->unique()->numerify('+36 ## ### ####'),
+            /* 'phonenumber' => fake()->unique()->numerify('+36 ## ### ####'), */
             'permission' => rand(1, 3),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('Aa123456@'),
