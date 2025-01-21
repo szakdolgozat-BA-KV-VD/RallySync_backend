@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\Permission;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -17,7 +19,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->foreignId('permission')->references('perm_id')->on('permissions');
+            $table->unsignedBigInteger('permission')->default(1);
+            $table->foreign('permission')->references('perm_id')->on('permissions');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
@@ -37,7 +40,12 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+        
+        User::create(['name' => 'admin', 'email' => 'admin@mamail.eu', 'permission' => 3, 'password' => Hash::make('Admin123')]);
+        User::create(['name' => 'felhasznalo', 'email' => 'felh@mamail.eu', 'permission' => 1, 'password' => Hash::make('Felh123')]);
     }
+
+    
 
     /**
      * Reverse the migrations.
