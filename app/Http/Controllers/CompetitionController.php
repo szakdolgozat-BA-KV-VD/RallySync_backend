@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Competition;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CompetitionController extends Controller
 {
@@ -12,7 +14,12 @@ class CompetitionController extends Controller
      */
     public function index()
     {
-        return Competition::all();
+        return DB::select('
+            SELECT o.name, c.event_name, p.place, c.description, c.start_date, c.end_date
+            FROM competitions c
+            INNER JOIN places p ON c.place = p.plac_id
+            INNER JOIN users o ON c.organiser = o.id
+        ');
     }
 
     /**
@@ -30,18 +37,53 @@ class CompetitionController extends Controller
      */
     public function show(string $id)
     {
-        return Competition::find($id);
+        return DB::select('
+        SELECT o.name, c.event_name, p.place, c.description, c.start_date, c.end_date
+            FROM competitions c
+            INNER JOIN places p ON c.place = p.plac_id
+            INNER JOIN users o ON c.organiser = o.id
+        WHERE c.organiser = ?
+    ', [$id]);
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        $record = Competition::find($id);
-        $record->fill($request->all());
-        $record->save();
+{
+    // Validate input to ensure correct data
+    $validator = Validator::make($request->all(), [
+        'event_name'   => 'nullable|string|max:255',
+        'place'        => 'nullable|integer|exists:places,plac_id',
+        'organiser'    => 'nullable|integer|exists:users,id',
+        'description'  => 'nullable|string|max:255',
+        'start_date'   => 'nullable|date',
+        'end_date'     => 'nullable|date|after_or_equal:start_date',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['error' => $validator->errors()], 422);
     }
+
+    // Get only provided fields and keep valid values (including 0)
+    $updateData = array_filter(
+        $request->only(['event_name', 'place', 'organiser', 'description', 'start_date', 'end_date']),
+        fn($value) => $value !== null
+    );
+
+    if (empty($updateData)) {
+        return response()->json(['message' => 'No data provided for update'], 400);
+    }
+
+    // Update the record in DB
+    $updated = DB::table('competitions')->where('comp_id', $id)->update($updateData);
+
+    if ($updated) {
+        return response()->json(['message' => 'Competition updated successfully']);
+    } else {
+        return response()->json(['message' => 'Competition not found or no changes made'], 404);
+    }
+}
 
     /**
      * Remove the specified resource from storage.

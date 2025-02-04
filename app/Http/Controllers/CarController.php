@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class CarController extends Controller
 {
@@ -75,11 +76,34 @@ class CarController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        $record = Car::find($id);
-        $record->fill($request->all());
-        $record->save();
+{
+    // Validate input to ensure correct data
+    $validator = Validator::make($request->all(), [
+        'brandtype' => 'nullable|integer|exists:brandtypes,bt_id',
+        'category'  => 'nullable|integer|exists:categories,categ_id',
+        'status'    => 'nullable|integer|exists:statuses,stat_id',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['error' => $validator->errors()], 422);
     }
+
+    // Filter out only the fields provided
+    $updateData = array_filter($request->only(['brandtype', 'category', 'status']), 'strlen');
+
+    if (empty($updateData)) {
+        return response()->json(['message' => 'No data provided for update'], 400);
+    }
+
+    // Update the record in DB
+    $updated = DB::table('cars')->where('cid', $id)->update($updateData);
+
+    if ($updated) {
+        return response()->json(['message' => 'Car updated successfully']);
+    } else {
+        return response()->json(['message' => 'Car not found or no changes made'], 404);
+    }
+}
 
     /**
      * Remove the specified resource from storage.
