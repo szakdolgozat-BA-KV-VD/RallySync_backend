@@ -10,13 +10,14 @@ use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Organisers;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Route;
 
 
 
 // PUBLIC
 Route::get('/users', [UserController::class, 'index']);
-Route::post('/users', [UserController::class, 'store']);
+Route::post('/user', [UserController::class, 'store']);
 Route::get('/users/{id}', [UserController::class, 'show']);
 Route::put('/users/{id}', [UserController::class, 'update']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
@@ -36,8 +37,8 @@ Route::post('/login',[AuthenticatedSessionController::class, 'store']);
 
 
 // USER
-Route::middleware(['auth:sanctum'])->group(function () {
-
+Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+    return $request -> user();
 });
 
 // ORGANISER

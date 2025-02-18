@@ -41,7 +41,7 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
         
-        User::create(['name' => 'admin', 'email' => 'admin@mamail.eu', 'permission' => 3, 'password' => Hash::make('Admin123')]);
+        User::create(['name' => 'admin', 'email' => 'admin@mamail.eu', 'permission' => 3, 'password' => Hash::make('123')]);
         User::create(['name' => 'felhasznalo', 'email' => 'felh@mamail.eu', 'permission' => 1, 'password' => Hash::make('Felh123')]);
     }
 
