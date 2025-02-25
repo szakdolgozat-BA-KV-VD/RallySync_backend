@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompcategController;
+use App\Http\Controllers\CompeetController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\UserController;
@@ -34,6 +35,13 @@ route::get("/categories", [CategoryController::class, "index"]);
 
 Route::post('/register',[RegisteredUserController::class, 'store']);
 Route::post('/login',[AuthenticatedSessionController::class, 'store']);
+
+
+Route::get('/mostUsedBrand', [CompeetController::class, "legtobbetHasznaltMarka"]);
+Route::get('/mostUsedCateg', [CompeetController::class, "legtobbetHasznaltKategoria"]);
+Route::get('/mostParticPlace', [CompeetController::class, "legtobbetVersenyzettTerulet"]);
+Route::get('/fastestTime', [CompeetController::class, "leggyorsabbPajaido"]);
+Route::get('/mostHostedOrg', [CompetitionController::class, "legtobbetSzervezo"]);
 
 
 // USER

@@ -92,4 +92,22 @@ class CompetitionController extends Controller
     {
         Competition::find($id)->delete();
     }
+
+    public function legtobbetSzervezo(){
+        return DB::select('
+        SELECT c.organiser, u.name, COUNT(*) AS competition_number
+        FROM competitions c
+        JOIN users u ON c.organiser = u.id
+        GROUP BY c.organiser, u.name
+        HAVING COUNT(*) = (
+            SELECT MAX(sub.competition_number)
+            FROM (
+                SELECT organiser, COUNT(*) AS competition_number
+                FROM competitions
+                GROUP BY organiser
+            ) AS sub
+        );
+    ');
+
+    }
 }
