@@ -18,14 +18,17 @@ return new class extends Migration
             $table->foreignId('competition')->references('comp_id')->on('competitions');
             $table->foreign('competitor')->references('id')->on('users');
             $table->foreignId('car')->references('cid')->on('cars');
-            $table->date('arrives_at');
-            $table->date('start_date');
-            $table->date('finish_date');
+            $table->dateTime('arrives_at');
+            $table->dateTime('start_date');
+            $table->dateTime('finish_date');
             $table->timestamps();
         });
 
         DB::statement("ALTER TABLE compeets ADD CONSTRAINT
-    	check_dates CHECK ('competitor' = 1)");
+    	check_celbaeresElobbMintStartolas CHECK (start_date < finish_date)");
+
+        DB::statement("ALTER TABLE compeets ADD CONSTRAINT
+    	check_erkezesElobbMintAStart CHECK (arrives_at < start_date)");
     }
 
     /**

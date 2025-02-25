@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Competition;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -27,9 +28,11 @@ class CompetitionController extends Controller
      */
     public function store(Request $request)
     {
-        $record = new Competition();
-        $record->fill($request->all());
-        $record->save();
+        if($this->isOrganiser($request->user)){
+            $record = new Competition();
+            $record->fill($request->all());
+            $record->save();
+        }
     }
 
     /**
@@ -91,5 +94,11 @@ class CompetitionController extends Controller
     public function destroy(string $id)
     {
         Competition::find($id)->delete();
+    }
+
+    //szervező-e a felhasználó
+    public function isOrganiser(string $id){
+        $user = User::find($id);
+        return $user->permission == 2;
     }
 }
