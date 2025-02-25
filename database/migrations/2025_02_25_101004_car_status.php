@@ -7,26 +7,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
-    {
-        DB::unprepared('CREATE TRIGGER carStatusChange 
-        After insert 
-        on compeets 
-        for each row 
-        begin 
-        update cars set status = 4 
-        where cid = new.cid
-        ');
-    }
+{
+    DB::unprepared('
+    CREATE TRIGGER carStatusChange 
+    AFTER INSERT ON compeets 
+    FOR EACH ROW 
+    BEGIN 
+        UPDATE cars SET status = 4 WHERE cid = NEW.car; 
+    END
+');
+}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        //
-    }
+public function down(): void
+{
+    DB::unprepared('DROP TRIGGER IF EXISTS carStatusChange');
+}
+
 };

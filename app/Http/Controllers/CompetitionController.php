@@ -112,6 +112,7 @@ class CompetitionController extends Controller
         );
     ');
     }
+    
     //szervező-e a felhasználó
     public function isOrganiser(string $id){
         $user = User::find($id);
