@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Place;
+use App\Models\User;
 use Faker\Provider\en_US\Text as En_USText;
 use Faker\Provider\fa_IR\Text as Fa_IRText;
 use Faker\Provider\hu_HU\Text;
@@ -31,7 +32,7 @@ class CompetitionFactory extends Factory
         return [
             'event_name' => fake()->text(10),
             'place' => rand(1, Place::count()),            
-            'organiser' => rand(2, 2),
+            'organiser' => rand(1, User::count()),
             'description' => fake()->text(50),
             'start_date' => date('Y-m-d', strtotime("2025-$random_month-$random_dayStart")),
             'end_date' => date('Y-m-d', strtotime("2025-$random_month-$random_dayEnd")),

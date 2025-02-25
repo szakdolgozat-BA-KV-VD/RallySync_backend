@@ -35,7 +35,7 @@ route::get("/categories", [CategoryController::class, "index"]);
 
 Route::post('/register',[RegisteredUserController::class, 'store']);
 Route::post('/login',[AuthenticatedSessionController::class, 'store']);
-
+Route::post('/compeet',[CompeetController::class, 'store']);
 
 Route::get('/mostUsedBrand', [CompeetController::class, "legtobbetHasznaltMarka"]);
 Route::get('/mostUsedCateg', [CompeetController::class, "legtobbetHasznaltKategoria"]);
@@ -45,13 +45,13 @@ Route::get('/mostHostedOrg', [CompetitionController::class, "legtobbetSzervezo"]
 
 
 // USER
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request -> user();
+Route::middleware(['auth:sanctum'])->get('/user', function () {
+    
 });
 
 // ORGANISER
 Route::middleware(['auth:sanctum', Organisers::class])->group(function () {
-
+    
 
 });
 
