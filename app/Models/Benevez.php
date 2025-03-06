@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Benevez extends Model
 {
-    /** @use HasFactory<\Database\Factories\BenevezFactory> */
-    use HasFactory;
+    protected $primaryKey = 'azon';
+
+    protected $fillable = 'elnevezes';
+    
 }

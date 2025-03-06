@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Auto extends Model
 {
-    /** @use HasFactory<\Database\Factories\AutoFactory> */
-    use HasFactory;
+    protected $primaryKey = 'azon';
+
+    protected $fillable = [
+        'marka_tipus',
+         'kategoria',
+          'allapot'
+        ];
+
 }

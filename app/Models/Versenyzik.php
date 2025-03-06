@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Versenyzik extends Model
 {
-    /** @use HasFactory<\Database\Factories\VersenyzikFactory> */
-    use HasFactory;
+    protected $primaryKey = 'verseny';
+
+    protected $fillable = [
+        'versenyzo',
+        'auto',
+        'erkezik',
+        'rajt_ido',
+        'cel_ido'
+    ];
 }

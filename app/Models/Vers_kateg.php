@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vers_kateg extends Model
 {
-    /** @use HasFactory<\Database\Factories\VersKategFactory> */
-    use HasFactory;
+    protected $primaryKey = 'verseny';
+
+    protected $fillable = 'kategoria';
 }

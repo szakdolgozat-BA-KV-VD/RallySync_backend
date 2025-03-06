@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Marka_tipus extends Model
 {
-    /** @use HasFactory<\Database\Factories\MarkaTipusFactory> */
-    use HasFactory;
+    protected $primaryKey = 'marka_tipus';
+
+    protected $fillable = 'elnevezes';
+    
 }

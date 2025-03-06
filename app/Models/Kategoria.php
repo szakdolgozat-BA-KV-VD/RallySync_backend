@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kategoria extends Model
 {
-    /** @use HasFactory<\Database\Factories\KategoriaFactory> */
-    use HasFactory;
+    protected $primaryKey = 'kategoria';
+
+    protected $fillable = 'elnevezes';
+    
 }

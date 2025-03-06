@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Helyszin extends Model
 {
-    /** @use HasFactory<\Database\Factories\HelyszinFactory> */
-    use HasFactory;
+    protected $primaryKey = 'helyszin';
+
+    protected $fillable = 'elnevezes';
+    
 }
