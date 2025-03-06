@@ -9,5 +9,5 @@ class Vers_kateg extends Model
 {
     protected $primaryKey = 'verseny';
 
-    protected $fillable = 'kategoria';
+    protected $fillable = ['kategoria'];
 }

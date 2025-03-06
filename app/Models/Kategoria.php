@@ -9,6 +9,6 @@ class Kategoria extends Model
 {
     protected $primaryKey = 'kategoria';
 
-    protected $fillable = 'elnevezes';
+    protected $fillable = ['elnevezes'];
     
 }

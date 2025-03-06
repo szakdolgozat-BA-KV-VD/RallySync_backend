@@ -9,6 +9,6 @@ class Jogosultsag extends Model
 {
     protected $primaryKey = 'jogosultsag';
 
-    protected $fillable = 'elnevezes';
+    protected $fillable = ['elnevezes'];
     
 }

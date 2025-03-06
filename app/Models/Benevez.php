@@ -9,6 +9,6 @@ class Benevez extends Model
 {
     protected $primaryKey = 'azon';
 
-    protected $fillable = 'elnevezes';
+    protected $fillable = ['elnevezes'];
     
 }

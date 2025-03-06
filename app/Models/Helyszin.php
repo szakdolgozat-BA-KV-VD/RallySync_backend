@@ -9,6 +9,6 @@ class Helyszin extends Model
 {
     protected $primaryKey = 'helyszin';
 
-    protected $fillable = 'elnevezes';
+    protected $fillable = ['elnevezes'];
     
 }

@@ -9,6 +9,6 @@ class Marka_tipus extends Model
 {
     protected $primaryKey = 'marka_tipus';
 
-    protected $fillable = 'elnevezes';
+    protected $fillable = ['elnevezes'];
     
 }
