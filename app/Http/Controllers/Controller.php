@@ -22,7 +22,21 @@ abstract class Controller
      */
     public function store(Request $request)
     {
-        //
+    
+    $fields = $request->only(['name', 'email', 'lakcim', 'telefonszam', 'password']);
+
+    $record = new User();
+    $record->fill($fields);
+
+    $record->save();
+
+    $token = $record->createToken('auth_token')->plainTextToken;
+
+    return response()->json([
+        'access_token' => $token,
+        'token_type' => 'Bearer',
+        'user' => $record
+    ]);
     }
 
     /**

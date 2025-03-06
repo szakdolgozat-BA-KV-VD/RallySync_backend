@@ -50,4 +50,8 @@ class User extends Authenticatable
         ];
     }
 
+    public function isAdmin()  {
+        return $this->jogosultsag === 3;
+    }
+
 }

@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Benevez extends Model
 {
-    protected $primaryKey = 'azon';
+    protected $primaryKey = ['versenyzo', 'verseny'];
 
-    protected $fillable = ['elnevezes'];
+    protected $fillable = ['kategoria'];
     
 }
