@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Compcateg;
 use App\Models\Competition;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class CompetitionController extends Controller
@@ -23,10 +26,18 @@ class CompetitionController extends Controller
      */
     public function store(Request $request)
     {
-        if ($this->isOrganiser($request->user)) {
-            $record = new Competition();
-            $record->fill($request->all());
-            $record->save();
+        //létrejön a competition!!!!
+        $competition = new Competition();
+        $competition->fill($request->all());
+        //elmenti a versenyt!
+        $competition->save();
+        //létrejön egy új compcateg
+        foreach ($request["category"] as $category) {
+            $cc = new Compcateg();
+            $cc->fill($request->all());
+            $cc->competition = $competition->comp_id;
+            $cc->category = $category;
+            $cc->save();
         }
     }
 
@@ -116,10 +127,12 @@ class CompetitionController extends Controller
         return $user->permission == 2;
     }
 
-    public function myCompetitions(string $id){
+    public function myCompetitions(string $id)
+    {
         return DB::select(
             "select * from competition
-            where organiser = ?", [$id]
+            where organiser = ?",
+            [$id]
         );
     }
 }

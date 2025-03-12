@@ -44,6 +44,7 @@ Route::middleware(['auth:sanctum', Organiser::class])->group(function () {
     route::get("/places", [PlaceController::class, "index"]);
     route::get("/categories", [CategoryController::class, "index"]);
     route::get("/versenyFelvisz", [CategoryController::class, "index"]);
+    route::post("/competition", [CompetitionController::class, "store"]);
 });
 Route::middleware(['auth:sanctum', Competitor::class])->group(function () {});
 
